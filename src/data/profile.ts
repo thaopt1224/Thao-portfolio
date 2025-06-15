@@ -51,7 +51,7 @@ export interface Profile {
 export const profileData: Profile = {
   name: "Phạm Thu Thảo",
   title: "Software Engineer",
-  about: "Tôi là một lập trình viên đam mê với công nghệ và luôn tìm kiếm những thách thức mới. Với kinh nghiệm trong việc phát triển web và ứng dụng, tôi luôn cố gắng tạo ra những sản phẩm chất lượng và trải nghiệm người dùng tốt nhất.",
+  about: "Với niềm đam mê công nghệ và những điều mới mẽ, cùng với đó là kinh nghiệm trong lĩnh vực phát triển ứng dụng di động hơn 2 năm, tôi hi vọng được cống hiến hết mình cho lĩnh vực lập trình.",
   email: "thaopt.1224@gmail.com",
   phone: "+84 333 xxxx 79",
   location: "Việt Nam",
@@ -65,7 +65,8 @@ export const profileData: Profile = {
     "MongoDB",
     "HTML/CSS",
     "Git",
-    "Firebase"
+    "Firebase",
+    "Flutter"
   ],
   education: [
     {
@@ -116,21 +117,48 @@ export const profileData: Profile = {
   projects: [
     {
       id: 1,
-      title: "E-commerce Website",
-      description: "Website thương mại điện tử với đầy đủ chức năng mua sắm, thanh toán và quản lý đơn hàng.",
-      technologies: ["React", "Node.js", "MongoDB", "Express"],
-      imageUrl: "/images/project1.jpg",
-      githubUrl: "https://github.com/yourusername/project1",
-      demoUrl: "https://project1-demo.com"
+      title: "Ứng dụng di động Diễn đàn",
+      description: "Xây dựng một diễn đàn chia sẽ thông tin trên di động.",
+      technologies: ["React-native", "Firebase"],
+      imageUrl: "https://forum.vbulletin.com/images/misc/vb_logo_darkblue.svg",
+      githubUrl: "",
+      demoUrl: ""
     },
     {
       id: 2,
-      title: "Task Management App",
-      description: "Ứng dụng quản lý công việc với các tính năng như tạo task, phân công, theo dõi tiến độ.",
-      technologies: ["React", "TypeScript", "Firebase"],
-      imageUrl: "/images/project2.jpg",
-      githubUrl: "https://github.com/yourusername/project2",
-      demoUrl: "https://project2-demo.com"
+      title: "Ứng dụng Hỗ trợ học Hoá",
+      description: "Ứng dụng tập hợp bài tập, phương trình hoá học cùng các kiến thức chương trình THCS, THPT của môn Hoá.",
+      technologies: ["React-native", "Google Admob"],
+      imageUrl: "https://bright-culture.com/wp-content/uploads/2021/06/5-Steps-to-Understand-Chemistry.png",
+      githubUrl: "",
+      demoUrl: ""
+    },
+    {
+      id: 3,
+      title: "Ứng dụng Vsub Idioms",
+      description: "Ứng dụng tập hợp các idioms bằng tiếng Anh. Có ví dụ và minh hoạ cách dùng",
+      technologies: ["React-native", "Google Admob"],
+      imageUrl: "https://www.frenchclass.in/wp-content/uploads/2024/04/Idioms-featured-image.webp",
+      githubUrl: "",
+      demoUrl: ""
+    },
+    {
+      id: 4,
+      title: "Web Văn phòng ảo",
+      description: "Có thể gữi tin nhắn, call video cá nhân, theo nhóm, còn có thể share màn hình.",
+      technologies: ["Flutter", "Java", "Swift"],
+      imageUrl: "https://fltmag.com/wp-content/uploads/2021/03/Picture-4-1024x603.png",
+      githubUrl: "",
+      demoUrl: ""
+    },
+    {
+      id: 5,
+      title: "Ứng dụng Tích luỹ điểm",
+      description: "Ứng dụng tích điểm mua hàng thông qua việc đọc thẻ mua hàng bằng thiết bị ngoại vi.",
+      technologies: ["Flutter", "Java", "Swift"],
+      imageUrl: "https://www.customology.com.au/wp-content/uploads/2019/10/Loyalty-Program-SS.jpg",
+      githubUrl: "",
+      demoUrl: ""
     }
   ]
 }; 
