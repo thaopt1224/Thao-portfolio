@@ -52,11 +52,11 @@ export const profileData: Profile = {
   name: "Phạm Thu Thảo",
   title: "Software Engineer",
   about: "Tôi là một lập trình viên đam mê với công nghệ và luôn tìm kiếm những thách thức mới. Với kinh nghiệm trong việc phát triển web và ứng dụng, tôi luôn cố gắng tạo ra những sản phẩm chất lượng và trải nghiệm người dùng tốt nhất.",
-  email: "example@email.com",
-  phone: "+84 123 456 789",
-  location: "Hà Nội, Việt Nam",
-  github: "https://github.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
+  email: "thaopt.1224@gmail.com",
+  phone: "+84 333 xxxx 79",
+  location: "Việt Nam",
+  github: "https://github.com/thaopt1224",
+  linkedin: "https://linkedin.com/in/thaopt1224",
   skills: [
     "React",
     "TypeScript",
@@ -65,40 +65,47 @@ export const profileData: Profile = {
     "MongoDB",
     "HTML/CSS",
     "Git",
-    "Docker"
+    "Firebase"
   ],
   education: [
     {
       id: 1,
-      school: "Đại học Bách Khoa Hà Nội",
+      school: "Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh",
       degree: "Cử nhân",
       field: "Công nghệ thông tin",
-      startDate: "2018",
-      endDate: "2022",
+      startDate: "2015",
+      endDate: "2019",
       description: "Chuyên ngành Kỹ thuật phần mềm"
     }
   ],
   certificates: [
     {
       id: 1,
-      name: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      description: "Chứng chỉ chuyên gia về kiến trúc giải pháp AWS"
+      name: "Certified Entry-Level Python Programmer – PCEP",
+      issuer: "pythoninstitute.org/pcep",
+      date: "2025",
+      description: "-"
     },
     {
       id: 2,
-      name: "Professional Scrum Master I",
+      name: "Agile software development with Scrum",
       issuer: "Scrum.org",
-      date: "2022",
+      date: "2019",
       description: "Chứng chỉ quản lý dự án theo phương pháp Scrum"
-    }
+    },
+    {
+      id: 3,
+      name: "Amazon Web Services Certified Developer Certification DVA-C02",
+      issuer: "Amazon Web Services",
+      date: "2025",
+      description: "-"
+    },
   ],
   languages: [
     {
       name: "Tiếng Anh",
-      level: "IELTS 7.5",
-      certificate: "IELTS Academic"
+      level: "TOEIC 990",
+      certificate: "-"
     },
     {
       name: "Tiếng Nhật",
