@@ -2,35 +2,38 @@ import React from 'react';
 import { Container, Typography, Grid, Paper, Box, Chip } from '@mui/material';
 import { School, Code, CardMembership, Language } from '@mui/icons-material';
 import { profileData } from '../data/profile';
+import { useTranslation } from 'react-i18next';
 
 const About: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as 'vi' | 'en' | 'ja' | 'zh';
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Typography variant="h2" component="h2" gutterBottom color="primary" textAlign="center" sx={{ mb: 6 }}>
-        Giới Thiệu
+        {t('about.title')}
       </Typography>
       
       {/* Học vấn */}
       <Box sx={{ mb: 8 }}>
         <Typography variant="h3" component="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <School color="primary" />
-          Học Vấn
+          {t('about.education')}
         </Typography>
         <Grid container spacing={3}>
           {profileData.education.map((edu) => (
             <Grid item xs={12} key={edu.id}>
               <Paper sx={{ p: 3 }}>
                 <Typography variant="h5" gutterBottom>
-                  {edu.school}
+                  {edu.school[lang]}
                 </Typography>
                 <Typography variant="subtitle1" color="primary" gutterBottom>
-                  {edu.degree} - {edu.field}
+                  {edu.degree[lang]} - {edu.field[lang]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {edu.startDate} - {edu.endDate}
                 </Typography>
                 <Typography variant="body1">
-                  {edu.description}
+                  {edu.description[lang]}
                 </Typography>
               </Paper>
             </Grid>
@@ -42,23 +45,23 @@ const About: React.FC = () => {
       <Box sx={{ mb: 8 }}>
         <Typography variant="h3" component="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <CardMembership color="primary" />
-          Bằng Cấp & Chứng Chỉ
+          {t('about.certificates')}
         </Typography>
         <Grid container spacing={3}>
           {profileData.certificates.map((cert) => (
             <Grid item xs={12} sm={6} key={cert.id}>
               <Paper sx={{ p: 3, height: '100%' }}>
                 <Typography variant="h5" gutterBottom>
-                  {cert.name}
+                  {cert.name[lang]}
                 </Typography>
                 <Typography variant="subtitle1" color="primary" gutterBottom>
-                  {cert.issuer}
+                  {cert.issuer[lang]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {cert.date}
                 </Typography>
                 <Typography variant="body1">
-                  {cert.description}
+                  {cert.description[lang]}
                 </Typography>
               </Paper>
             </Grid>
@@ -70,22 +73,22 @@ const About: React.FC = () => {
       <Box sx={{ mb: 8 }}>
         <Typography variant="h3" component="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Language color="primary" />
-          Ngoại Ngữ
+          {t('about.languages')}
         </Typography>
         <Paper sx={{ p: 3 }}>
           <Grid container spacing={3}>
-            {profileData.languages.map((lang, index) => (
+            {profileData.languages.map((langObj, index) => (
               <Grid item xs={12} sm={6} key={index}>
                 <Box sx={{ p: 2, border: '1px solid', borderColor: 'primary.main', borderRadius: 1 }}>
                   <Typography variant="h6" gutterBottom>
-                    {lang.name}
+                    {langObj.name[lang]}
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
-                    {lang.level}
+                    {langObj.level}
                   </Typography>
-                  {lang.certificate && (
+                  {langObj.certificate && (
                     <Typography variant="body2" color="text.secondary">
-                      {lang.certificate}
+                      {langObj.certificate[lang]}
                     </Typography>
                   )}
                 </Box>
@@ -99,7 +102,7 @@ const About: React.FC = () => {
       <Box>
         <Typography variant="h3" component="h3" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Code color="primary" />
-          Kỹ Năng
+          {t('about.skills')}
         </Typography>
         <Paper sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>

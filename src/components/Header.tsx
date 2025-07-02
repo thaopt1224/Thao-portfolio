@@ -1,13 +1,24 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Avatar, Select, MenuItem } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import avatarImage from '../assets/avatar.JPG';
+import { useTranslation } from 'react-i18next';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = React.useState(i18n.language);
 
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleChangeLang = (event: SelectChangeEvent) => {
+    const newLang = event.target.value as string;
+    setLang(newLang);
+    i18n.changeLanguage(newLang);
   };
 
   return (
@@ -43,7 +54,7 @@ const Header: React.FC = () => {
               }
             }}
           >
-            Trang chủ
+            {t('header.home')}
           </Button>
           <Button 
             color="inherit" 
@@ -56,7 +67,7 @@ const Header: React.FC = () => {
               }
             }}
           >
-            Giới thiệu
+            {t('header.about')}
           </Button>
           <Button 
             color="inherit" 
@@ -69,7 +80,7 @@ const Header: React.FC = () => {
               }
             }}
           >
-            Dự án
+            {t('header.projects')}
           </Button>
           <Button 
             color="inherit" 
@@ -82,8 +93,22 @@ const Header: React.FC = () => {
               }
             }}
           >
-            Liên hệ
+            {t('header.contact')}
           </Button>
+          <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+            <LanguageIcon sx={{ color: 'white', mr: 1 }} />
+            <Select
+              value={lang}
+              onChange={handleChangeLang}
+              size="small"
+              sx={{ color: 'white', borderColor: 'white', minWidth: 80, '.MuiSvgIcon-root': { color: 'white' } }}
+            >
+              <MenuItem value="vi">VI</MenuItem>
+              <MenuItem value="en">EN</MenuItem>
+              <MenuItem value="ja">日本語</MenuItem>
+              <MenuItem value="zh">中文</MenuItem>
+            </Select>
+          </Box>
         </Box>
       </Toolbar>
     </AppBar>

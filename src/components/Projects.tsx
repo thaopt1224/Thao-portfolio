@@ -1,12 +1,15 @@
 import React from 'react';
 import { Container, Typography, Grid, Card, CardContent, CardMedia, CardActions, Button, Chip, Box } from '@mui/material';
 import { profileData } from '../data/profile';
+import { useTranslation } from 'react-i18next';
 
 const Projects: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as 'vi' | 'en' | 'ja' | 'zh';
   return (
     <Container maxWidth="lg" sx={{ py: 8 }}>
       <Typography variant="h2" component="h2" gutterBottom color="primary" textAlign="center" sx={{ mb: 6 }}>
-        Các Dự Án
+        {t('projects.title')}
       </Typography>
       <Grid container spacing={4}>
         {profileData.projects.map((project) => (
@@ -16,14 +19,14 @@ const Projects: React.FC = () => {
                 component="img"
                 height="200"
                 image={project.imageUrl}
-                alt={project.title}
+                alt={project.title[lang]}
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {project.title}
+                  {project.title[lang]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" paragraph>
-                  {project.description}
+                  {project.description[lang]}
                 </Typography>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
                   {project.technologies.map((tech) => (

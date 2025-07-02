@@ -5,11 +5,14 @@ import { profileData } from '../data/profile';
 import { motion } from 'framer-motion';
 import avatarImage from '../assets/avatar.JPG';
 import backgroundImage from '../assets/background.png';
+import { useTranslation } from 'react-i18next';
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
 
 const Home: React.FC = () => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language as 'vi' | 'en' | 'ja' | 'zh';
   return (
     <Box
       sx={{
@@ -64,7 +67,7 @@ const Home: React.FC = () => {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                {profileData.name}
+                {profileData.name[lang]}
               </Typography>
               <Typography
                 variant="h2"
@@ -76,7 +79,7 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                {profileData.title}
+                {profileData.title[lang]}
               </Typography>
               <Typography
                 variant="body1"
@@ -92,7 +95,7 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                {profileData.about}
+                {profileData.about[lang]}
               </Typography>
               <MotionBox
                 sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}
@@ -156,7 +159,7 @@ const Home: React.FC = () => {
             >
               <Avatar
                 src={avatarImage}
-                alt={profileData.name}
+                alt={profileData.name[lang]}
                 sx={{
                   width: { xs: 200, md: 300 },
                   height: { xs: 200, md: 300 },
