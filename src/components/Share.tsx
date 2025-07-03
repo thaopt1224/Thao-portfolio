@@ -54,6 +54,7 @@ const Share: React.FC = () => {
     mainCanvas.toBlob(async (blob) => {
       if (!blob) return;
       const file = new File([blob], 'qr-code-with-text.png', { type: 'image/png' });
+      // Thử dùng navigator.canShare với email, nếu không thì fallback mailto
       // @ts-ignore
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
@@ -62,13 +63,17 @@ const Share: React.FC = () => {
             files: [file],
             title: 'QR Code with Text',
             text: 'This is QR code with relative info!',
+            // Không có trường email, nên sẽ fallback phía dưới nếu không hỗ trợ
           });
-          alert('Đã chia sẻ thành công!');
+          alert('Shared successfully!');
         } catch (err: any) {
-          alert('Lỗi khi chia sẻ: ' + err.message);
+          alert('Error sharing: ' + err.message);
         }
       } else {
-        alert('Thiết bị hoặc trình duyệt không hỗ trợ chia sẻ file.');
+        // Fallback: mở mailto với subject và body, không đính kèm được file
+        const subject = encodeURIComponent('QR Code with Info');
+        const body = encodeURIComponent('This is QR code with relative info!\n(Please find the attached image if supported by your device/browser.)');
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
       }
     });
   };
@@ -77,7 +82,7 @@ const Share: React.FC = () => {
     <div style={{ textAlign: 'center', marginTop: 100 }}>
       <canvas id="mainCanvas" width={300} height={420} style={{ border: '1px solid #000' }}></canvas>
       <br />
-      <button onClick={handleShare} style={{ marginTop: 16, padding: '8px 24px', fontSize: 16 }}>Share Image</button>
+      <button onClick={handleShare} style={{ marginTop: 16, padding: '8px 24px', fontSize: 16 }}>share mail</button>
     </div>
   );
 };
