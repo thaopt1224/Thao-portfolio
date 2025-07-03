@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QR Code + Text on Canvas</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+
+<canvas id="mainCanvas" width="300" height="420" style="border:1px solid #000;"></canvas>
+<br />
+<button id="shareBtn">Share Image</button>
+
+<script>
+  const mainCanvas = document.getElementById('mainCanvas');
+  const ctxMain = mainCanvas.getContext('2d');
+
+  // Tạo canvas tạm để vẽ QR code
+  const qrCanvas = document.createElement('canvas');
+  qrCanvas.width = 300;
+  qrCanvas.height = 300;
+  const ctxQR = qrCanvas.getContext('2d');
+
+  // Vẽ QR code lên canvas tạm
+  QRCode.toCanvas(qrCanvas, 'https://example.com', { width: 300, margin: 0 }, function (error) {
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    // Xóa canvas chính
+    ctxMain.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+    // Vẽ text ở trên cùng
+    ctxMain.font = '20px Arial';
+    ctxMain.fillStyle = 'black';
+    const line1 = 'This is qr code';
+    let x = (mainCanvas.width - ctxMain.measureText(line1).width) / 2;
+    ctxMain.fillText(line1, x, 30);
+
+    // Vẽ QR code từ canvas tạm sang canvas chính, vị trí y=50
+    ctxMain.drawImage(qrCanvas, 0, 50);
+
+    // Vẽ text đậm dưới QR code
+    ctxMain.font = 'bold 18px Arial';
+    const address = 'Address: FGH66FGrfvKKKK';
+    x = (mainCanvas.width - ctxMain.measureText(address).width) / 2;
+    ctxMain.fillText(address, x, 370);
+
+    // Vẽ text bình thường phía dưới nữa
+    ctxMain.font = '18px Arial';
+    const price = 'Price: 0.4566';
+    x = (mainCanvas.width - ctxMain.measureText(price).width) / 2;
+    ctxMain.fillText(price, x, 400);
+  });
+
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    mainCanvas.toBlob(async blob => {
+      const file = new File([blob], 'qr-code-with-text.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'QR Code with Text',
+            text: 'Đây là ảnh QR code cùng thông tin!',
+          });
+          alert('Đã chia sẻ thành công!');
+        } catch (err) {
+          alert('Lỗi khi chia sẻ: ' + err.message);
+        }
+      } else {
+        alert('Thiết bị hoặc trình duyệt không hỗ trợ chia sẻ file.');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

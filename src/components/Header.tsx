@@ -95,6 +95,19 @@ const Header: React.FC = () => {
           >
             {t('header.contact')}
           </Button>
+          <Button 
+            color="inherit" 
+            component={Link} 
+            to="/share"
+            sx={{ 
+              color: isActive('/share') ? 'primary.main' : 'inherit',
+              '&:hover': {
+                color: 'primary.main'
+              }
+            }}
+          >
+            {t('header.share')}
+          </Button>
           <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
             <LanguageIcon sx={{ color: 'white', mr: 1 }} />
             <Select

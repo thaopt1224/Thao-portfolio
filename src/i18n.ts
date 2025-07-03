@@ -9,6 +9,7 @@ const resources = {
         about: 'Giới thiệu',
         projects: 'Dự án',
         contact: 'Liên hệ',
+        share: 'Chia sẻ',
       },
       about: {
         title: 'Giới Thiệu',
@@ -34,6 +35,7 @@ const resources = {
         about: 'About',
         projects: 'Projects',
         contact: 'Contact',
+        share: 'Share',
       },
       about: {
         title: 'About',
@@ -59,6 +61,7 @@ const resources = {
         about: '紹介',
         projects: 'プロジェクト',
         contact: '連絡先',
+        share: 'シェア',
       },
       about: {
         title: '紹介',
@@ -84,6 +87,7 @@ const resources = {
         about: '关于',
         projects: '项目',
         contact: '联系',
+        share: '分享',
       },
       about: {
         title: '关于',
