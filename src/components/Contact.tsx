@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography, Box, Grid, Paper, Link } from '@mui/material';
-import { Email, Phone, LocationOn, GitHub, LinkedIn } from '@mui/icons-material';
+import { Email, Phone, LocationOn, GitHub, LinkedIn, Facebook, Instagram } from '@mui/icons-material';
 import { profileData } from '../data/profile';
 import { useTranslation } from 'react-i18next';
 
@@ -54,6 +54,18 @@ const Contact: React.FC = () => {
                 <LinkedIn color="primary" />
                 <Link href={profileData.linkedin} target="_blank" color="inherit">
                   LinkedIn
+                </Link>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Facebook color="primary" />
+                <Link href="https://www.facebook.com/thaopt.1224/" target="_blank" color="inherit">
+                  {t('contact.facebook')}
+                </Link>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Instagram color="primary" />
+                <Link href="https://www.instagram.com/thaopt.1224/" target="_blank" color="inherit">
+                  {t('contact.instagram')}
                 </Link>
               </Box>
             </Box>

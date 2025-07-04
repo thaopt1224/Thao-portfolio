@@ -22,6 +22,8 @@ const resources = {
         title: 'Liên Hệ',
         info: 'Thông Tin Liên Hệ',
         social: 'Mạng Xã Hội',
+        facebook: 'Facebook',
+        instagram: 'Instagram',
       },
       projects: {
         title: 'Các Dự Án',
@@ -48,6 +50,8 @@ const resources = {
         title: 'Contact',
         info: 'Contact Information',
         social: 'Social Network',
+        facebook: 'Facebook',
+        instagram: 'Instagram',
       },
       projects: {
         title: 'Projects',
@@ -74,6 +78,8 @@ const resources = {
         title: '連絡先',
         info: '連絡情報',
         social: 'ソーシャルネットワーク',
+        facebook: 'Facebook',
+        instagram: 'Instagram',
       },
       projects: {
         title: 'プロジェクト',
@@ -100,6 +106,8 @@ const resources = {
         title: '联系',
         info: '联系信息',
         social: '社交网络',
+        facebook: 'Facebook',
+        instagram: 'Instagram',
       },
       projects: {
         title: '项目',
