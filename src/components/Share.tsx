@@ -1,89 +1,158 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container, Typography, Box, Paper, Button, Grid } from '@mui/material';
+import { Share as ShareIcon, QrCode, ContentCopy, CheckCircle } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
+import QRCode from 'qrcode';
 
 const Share: React.FC = () => {
+  const { t } = useTranslation();
+  const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  const contactUrl = 'https://thaopt1224.github.io/Thao-portfolio/#/contact';
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js';
-    script.async = true;
-    script.onload = () => {
-      // @ts-ignore
-      const QRCode = window.QRCode;
-      const mainCanvas = document.getElementById('mainCanvas') as HTMLCanvasElement;
-      if (!mainCanvas) return;
-      const ctxMain = mainCanvas.getContext('2d');
-      const qrCanvas = document.createElement('canvas');
-      qrCanvas.width = 300;
-      qrCanvas.height = 300;
-      const ctxQR = qrCanvas.getContext('2d');
-      // @ts-ignore
-      QRCode.toCanvas(qrCanvas, 'https://example.com', { width: 300, margin: 0 }, function (error: any) {
-        if (error) {
-          console.error(error);
-          return;
-        }
-        ctxMain?.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-        // Vẽ nền xanh lam nhẹ nhàng cho canvas chính
-        ctxMain!.fillStyle = '#e3f2fd';
-        ctxMain!.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
-        // Vẽ text ở trên cùng
-        ctxMain!.font = '20px Arial';
-        ctxMain!.fillStyle = 'black';
-        const line1 = 'This is qr code';
-        let x = (mainCanvas.width - ctxMain!.measureText(line1).width) / 2;
-        ctxMain!.fillText(line1, x, 30);
-        ctxMain!.drawImage(qrCanvas, 0, 50);
-        ctxMain!.font = 'bold 18px Arial';
-        const address = 'Address: FGH66FGrfvKKKK';
-        x = (mainCanvas.width - ctxMain!.measureText(address).width) / 2;
-        ctxMain!.fillText(address, x, 370);
-        ctxMain!.font = '18px Arial';
-        const price = 'Price: 0.4566';
-        x = (mainCanvas.width - ctxMain!.measureText(price).width) / 2;
-        ctxMain!.fillText(price, x, 400);
-      });
-    };
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
+    generateQRCode();
   }, []);
 
-  const handleShare = () => {
-    const mainCanvas = document.getElementById('mainCanvas') as HTMLCanvasElement;
-    if (!mainCanvas) return;
-    mainCanvas.toBlob(async (blob) => {
-      if (!blob) return;
-      const file = new File([blob], 'qr-code-with-text.png', { type: 'image/png' });
-      // Thử dùng navigator.canShare với email, nếu không thì fallback mailto
-      // @ts-ignore
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          // @ts-ignore
-          await navigator.share({
-            files: [file],
-            title: 'QR Code with Text',
-            text: 'This is QR code with relative info!',
-            // Không có trường email, nên sẽ fallback phía dưới nếu không hỗ trợ
-          });
-          alert('Shared successfully!');
-        } catch (err: any) {
-          alert('Error sharing: ' + err.message);
+  const generateQRCode = async () => {
+    try {
+      const url = await QRCode.toDataURL(contactUrl, {
+        width: 300,
+        margin: 2,
+        color: {
+          dark: '#FF5722',
+          light: '#FFFFFF'
         }
-      } else {
-        // Fallback: mở mailto với subject và body, không đính kèm được file
-        const subject = encodeURIComponent('QR Code with Info');
-        const body = encodeURIComponent('This is QR code with relative info!\n(Please find the attached image if supported by your device/browser.)');
-        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+      });
+      setQrCodeUrl(url);
+    } catch (err) {
+      console.error('Error generating QR code:', err);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(contactUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
+  };
+
+  const handleShare = async () => {
+    if (navigator.share && navigator.canShare) {
+      try {
+        // Convert QR code data URL to blob
+        const response = await fetch(qrCodeUrl);
+        const blob = await response.blob();
+        const file = new File([blob], 'contact-qr-code.png', { type: 'image/png' });
+
+        // Check if sharing files is supported
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'Thaopt.1224 - Contact QR Code',
+            text: 'Scan this QR code to access my contact information!',
+            url: contactUrl,
+            files: [file]
+          });
+        } else {
+          // Fallback: share without file
+          await navigator.share({
+            title: 'Thaopt.1224 - Contact',
+            text: 'Check out my portfolio and contact information!',
+            url: contactUrl,
+          });
+        }
+      } catch (err) {
+        console.error('Error sharing:', err);
+        // Fallback to copy link
+        handleCopyLink();
       }
-    });
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      handleCopyLink();
+    }
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: 100 }}>
-      <canvas id="mainCanvas" width={300} height={420} style={{ border: '1px solid #000' }}></canvas>
-      <br />
-      <button onClick={handleShare} style={{ marginTop: 16, padding: '8px 24px', fontSize: 16 }}>share mail</button>
-    </div>
+    <Container maxWidth="md" sx={{ py: 8 }}>
+      <Typography variant="h2" component="h2" gutterBottom color="primary" textAlign="center" sx={{ mb: 6 }}>
+        {t('share.title')}
+      </Typography>
+
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} md={6}>
+          <Paper sx={{ p: 4, textAlign: 'center' }}>
+            <Typography variant="h5" gutterBottom color="primary" sx={{ mb: 3 }}>
+              {t('share.qrTitle')}
+            </Typography>
+            
+            {qrCodeUrl && (
+              <Box sx={{ mb: 3 }}>
+                <img 
+                  src={qrCodeUrl} 
+                  alt="QR Code" 
+                  style={{ 
+                    maxWidth: '100%', 
+                    height: 'auto',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+                  }} 
+                />
+              </Box>
+            )}
+
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              {t('share.qrDescription')}
+            </Typography>
+
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={copied ? <CheckCircle /> : <ContentCopy />}
+                onClick={handleCopyLink}
+                sx={{
+                  px: 3,
+                  py: 1.5,
+                  borderRadius: '25px',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  boxShadow: '0 4px 15px rgba(255, 87, 34, 0.3)',
+                  '&:hover': {
+                    boxShadow: '0 6px 20px rgba(255, 87, 34, 0.4)',
+                  }
+                }}
+              >
+                {copied ? t('share.copied') : t('share.copyLink')}
+              </Button>
+
+              <Button
+                variant="outlined"
+                color="primary"
+                startIcon={<ShareIcon />}
+                onClick={handleShare}
+                sx={{
+                  px: 3,
+                  py: 1.5,
+                  borderRadius: '25px',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  borderWidth: 2,
+                  '&:hover': {
+                    borderWidth: 2,
+                  }
+                }}
+              >
+                {t('share.share')}
+              </Button>
+            </Box>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

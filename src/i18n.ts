@@ -38,6 +38,14 @@ const resources = {
       projects: {
         title: 'Các Dự Án',
       },
+      share: {
+        title: 'Chia sẻ thông tin liên hệ',
+        qrTitle: 'Mã QR truy cập nhanh trang liên hệ',
+        qrDescription: 'Quét mã QR này để mở trang liên hệ của tôi hoặc chia sẻ với bạn bè, đồng nghiệp.',
+        copyLink: 'Sao chép đường dẫn',
+        copied: 'Đã sao chép vào clipboard!',
+        share: 'Chia sẻ mã QR',
+      },
     },
   },
   en: {
@@ -75,6 +83,14 @@ const resources = {
       },
       projects: {
         title: 'Projects',
+      },
+      share: {
+        title: 'Share my contact info',
+        qrTitle: 'Quick access QR code for contact page',
+        qrDescription: 'Scan this QR code to open my contact page or share it with your friends and colleagues.',
+        copyLink: 'Copy link',
+        copied: 'Copied to clipboard!',
+        share: 'Share QR code',
       },
     },
   },
@@ -114,6 +130,14 @@ const resources = {
       projects: {
         title: 'プロジェクト',
       },
+      share: {
+        title: '連絡先情報を共有',
+        qrTitle: '連絡先ページへのクイックアクセスQRコード',
+        qrDescription: 'このQRコードをスキャンして連絡先ページを開くか、友人や同僚と共有してください。',
+        copyLink: 'リンクをコピー',
+        copied: 'クリップボードにコピーしました！',
+        share: 'QRコードを共有',
+      },
     },
   },
   zh: {
@@ -151,6 +175,14 @@ const resources = {
       },
       projects: {
         title: '项目',
+      },
+      share: {
+        title: '分享我的联系信息',
+        qrTitle: '联系页面的快速访问二维码',
+        qrDescription: '扫描此二维码以打开我的联系页面，或与您的朋友和同事分享。',
+        copyLink: '复制链接',
+        copied: '已复制到剪贴板！',
+        share: '分享二维码',
       },
     },
   },
