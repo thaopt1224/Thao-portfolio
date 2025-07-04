@@ -170,7 +170,8 @@ const Header: React.FC = () => {
             variant="contained"
             color="primary"
             startIcon={<ShareIcon />}
-            onClick={handleShare}
+            component={Link}
+            to="/share"
             sx={{
               ml: 1,
               px: 2,
@@ -184,6 +185,8 @@ const Header: React.FC = () => {
                 transform: 'translateY(-1px)',
               },
               transition: 'all 0.2s ease-in-out',
+              color: isActive('/share') ? 'primary.main' : 'white',
+              backgroundColor: isActive('/share') ? 'white' : 'primary.main',
             }}
           >
             {t('header.share')}
